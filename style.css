@@ -1,20 +1,18 @@
 body, html {
     margin: 0;
     padding: 0;
+    overflow: hidden; /* Prevent scroll bars */
+  }
+  
+  #image-container {
+    position: absolute;
     width: 100%;
     height: 100%;
-    overflow: hidden;
-}
-
-#image-container {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
-    height: 100%;
-}
-
-.img-tile {
-    width: calc(100% / 20); /* 20 tiles per row */
-    height: calc(100% / 20); /* 20 tiles per column */
-    object-fit: cover;
-}
+  }
+  
+  img {
+    /* Image size will be set dynamically in JavaScript */
+  }
+  
