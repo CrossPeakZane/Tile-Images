@@ -1,46 +1,40 @@
-// Function to fetch a random image and append it to the container
-function fetchAndAppendImage(imageSize) {
-    console.log("Fetching a random image...");
-  
-    // Using Lorem Picsum as the source, since it doesn't require an API key
-    const imageUrl = `https://picsum.photos/${imageSize}`;
-  
-    fetch(imageUrl)
-      .then((response) => {
-        if (!response.ok) {
-          console.error("Error fetching the image:", response.status);
-          return;
-        }
-  
-        const img = new Image(imageSize, imageSize);
-        img.style.width = `${imageSize}px`;
-        img.style.height = `${imageSize}px`;
-        img.src = response.url;
-        document.getElementById('image-container').appendChild(img);
-  
-        console.log("Image fetched and appended:", img.src);
-      })
-      .catch((error) => console.error("Error fetching image:", error));
+// Function to populate the screen with images
+function populateImages() {
+  const container = document.getElementById('image-container');
+  const containerWidth = window.innerWidth;
+  const containerHeight = window.innerHeight;
+
+  // Number of rows and columns to divide the screen into
+  const rows = 5;
+  const cols = 5;
+
+  // Calculating the exact width and height of each image tile
+  const imgWidth = Math.floor(containerWidth / cols);
+  const imgHeight = Math.floor(containerHeight / rows);
+
+  // Total images required to fill the screen
+  const totalImages = rows * cols;
+
+  console.log(`Image size: ${imgWidth}x${imgHeight}, Total images: ${totalImages}`);
+
+  for (let i = 0; i < totalImages; i++) {
+    // Creating an image element
+    const img = document.createElement('img');
+    img.width = imgWidth;
+    img.height = imgHeight;
+
+    // Setting the source URL with the rounded width and height
+    // Adding a random parameter to ensure a new random image is fetched
+    const randomParam = Math.random();
+    img.src = `https://picsum.photos/${Math.round(imgWidth)}/${Math.round(imgHeight)}?random=${randomParam}`;
+
+    // Appending the image to the container
+    container.appendChild(img);
+
+    console.log(`Image ${i + 1} appended with size ${imgWidth}x${imgHeight}`);
   }
-  
-  // Function to calculate the number of images needed and fetch them
-  function populateImages() {
-    const containerWidth = window.innerWidth;
-    const containerHeight = window.innerHeight;
-  
-    // Calculate the exact size of the images to fit the screen perfectly
-    const columns = 10; // You can change this to set the number of columns
-    const imageSize = containerWidth / columns;
-    const rows = Math.ceil(containerHeight / imageSize);
-    const totalImages = rows * columns;
-  
-    console.log(`Total images required to fill the screen: ${totalImages}, Size of each image: ${imageSize}`);
-  
-    for (let i = 0; i < totalImages; i++) {
-      fetchAndAppendImage(imageSize);
-    }
-  }
-  
-  // Invoke the function on page load
-  populateImages();
-  
+}
+
+// Invoke the function on page load
+populateImages();
+
