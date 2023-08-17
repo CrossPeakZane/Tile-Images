@@ -4,23 +4,17 @@ function populateImages() {
   const containerWidth = window.innerWidth;
   const containerHeight = window.innerHeight;
 
-  console.log(`Container width: ${containerWidth}, Container height: ${containerHeight}`);
-
-  // Determine the size of each square tile to fit the width perfectly
+  const borderSize = 5; // Size of the border in pixels
   const cols = Math.floor(containerWidth / 100); // Assuming each tile is 100 pixels
   const imgSize = containerWidth / cols;
-
-  console.log(`Number of columns: ${cols}, Size of each tile: ${imgSize}`);
 
   // Number of rows to divide the screen into
   const rows = Math.floor(containerHeight / imgSize);
 
-  console.log(`Number of rows: ${rows}`);
-
   // Total images required to fill the screen
   const totalImages = rows * cols;
 
-  console.log(`Total images: ${totalImages}`);
+  let highlightedImg = null; // To keep track of the currently highlighted image
 
   for (let i = 0; i < totalImages; i++) {
     // Creating an image element
@@ -33,10 +27,21 @@ function populateImages() {
     const randomParam = Math.random() + i;
     img.src = `https://picsum.photos/${Math.round(imgSize)}/${Math.round(imgSize)}?random=${randomParam}`;
 
+    // Adding a click event listener to highlight the image in blue
+    img.addEventListener('click', function() {
+      if (highlightedImg) {
+        highlightedImg.style.border = 'none'; // Unhighlight the previous image
+        highlightedImg.style.width = `${imgSize}px`;
+        highlightedImg.style.height = `${imgSize}px`;
+      }
+      img.style.border = `${borderSize}px solid blue`;
+      img.style.width = `${imgSize - borderSize * 2}px`;
+      img.style.height = `${imgSize - borderSize * 2}px`;
+      highlightedImg = img; // Update the currently highlighted image
+    });
+
     // Appending the image to the container
     container.appendChild(img);
-
-    console.log(`Image ${i + 1} appended with size ${imgSize}x${imgSize}`);
   }
 }
 
