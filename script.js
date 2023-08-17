@@ -29,8 +29,8 @@ function populateImages() {
     img.height = imgSize;
 
     // Setting the source URL with the rounded width and height
-    // Adding a random parameter to ensure a new random image is fetched
-    const randomParam = Math.random();
+    // Adding a random parameter combined with the index to ensure a new random image is fetched
+    const randomParam = Math.random() + i;
     img.src = `https://picsum.photos/${Math.round(imgSize)}/${Math.round(imgSize)}?random=${randomParam}`;
 
     // Appending the image to the container
