@@ -1,18 +1,16 @@
 body, html {
-    margin: 0;
-    padding: 0;
-    overflow: hidden; /* Prevent scroll bars */
-  }
-  
-  #image-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  img {
-    /* Image size will be set dynamically in JavaScript */
-  }
-  
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent scroll bars */
+}
+
+#image-container {
+  line-height: 0; /* Set line height to 0 */
+  font-size: 0; /* Set font size to 0 */
+}
+
+img {
+  display: inline-block; /* Display images as inline-block elements */
+  margin: 0; /* Remove any default margins */
+  padding: 0; /* Remove any default padding */
+}
